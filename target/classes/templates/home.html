@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta name="description" content="spring-boot thymeleaf | home ">
+    <div th:replace="fragments/header :: header-login-css"></div>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/products.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/main_styles.css}"/>
+
+    <script type="text/javascript" th:src="@{/static/js/products.js}"></script>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div th:replace="fragments/products :: products"></div>
+
+<footer>
+    <div class="separator" th:replace="fragments/footer :: footer"></div>
+</footer>
+
+</body>
+</html>

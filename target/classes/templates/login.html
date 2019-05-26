@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <meta name="description" content="spring-boot thymeleaf | Login ">
+    <div th:replace="fragments/header :: header-login-css"></div>
+</head>
+<body>
+<br/>
+<hr/>
+<div class="separator"></div>
+
+<div class="row">
+    <div class="col"></div>
+    <div class="col-6">
+            <div class="card">
+            <article class="card-body">
+
+                <div th:if="${param.error}" class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert"
+                                aria-hidden="true">&times;
+                        </button>
+                        Invalid username or password.
+                    </div>
+
+            <a th:href="@{/register}" class="float-right btn btn-outline-primary">Sign up</a>
+            <h4 class="card-title mb-4 mt-1">Sign in</h4>
+            	 <form th:action="@{/login}" method="post">
+                    <div class="form-group">
+                    	<label>Your Username</label>
+                        <input type="text" name="username" class="form-control"
+                                       placeholder="Username" required="required" value=""/>
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                    	<a class="float-right" href="#">Forgot?</a>
+                    	<label>Your password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Password"
+                                      required="required"/>
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                    <div class="checkbox">
+                      <label> <input type="checkbox"> Save password </label>
+                    </div> <!-- checkbox .// -->
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Login  </button>
+                    </div> <!-- form-group// -->
+                </form>
+            </article>
+        </div>
+    </div>
+    <div class="col"></div>
+</div>
+
+</body>
+</html>

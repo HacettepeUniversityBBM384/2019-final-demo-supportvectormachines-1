@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+</head>
+
+<body>
+
+<div class="products" th:fragment="products">
+
+    <div style="margin-left: 20px; margin-top: -25px" class="py-1 text-left">
+        <h2>Products </h2>
+    </div>
+
+    <div class='row'>
+        <div class='product--black' th:each="product : ${products}">
+            <div class='product_inner'>
+                <img th:src="@{'../../static/images/product_' + ${product.id} + '.jpg'}" width='300'>
+                <a th:text="${product.name}" th:href="@{'/product/' + ${product.id}}"><p
+                        th:text="${product.name}"></p></a>
+                <div th:inline="text">Price: $[[${product.price}]]</div>
+                <div th:inline="text">In Stock: [[${product.quantity}]]</div>
+
+                <form th:object="${product}"
+                      th:action="@{/shoppingCart/addProduct/{productId}(productId=${product.id})}" method="post">
+                        <a sec:authorize="isAuthenticated()" th:if="${product.quantity}>0">
+                            <button type="submit">Add to cart</button>
+                        </a>
+                </form>
+            </div>
+
+            <div class='product_overlay'>
+                <h2>Added to cart</h2>
+                <i class='fa fa-check'></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
