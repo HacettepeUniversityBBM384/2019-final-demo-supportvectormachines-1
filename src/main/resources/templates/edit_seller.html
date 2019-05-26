@@ -84,7 +84,7 @@
                     <strong>Error!</strong> The password must be at least 8 characters in length!
                 </div>
 
-        <form th:object="${user}" th:action="@{/user/update/{id}(id=${user.id})}" method="post">
+        <form th:object="${user}" th:action="@{/admin/updateSeller/{id}(id=${user.id})}" method="post">
             <div class="form-group">
                 <label class="col-lg-3 control-label">Username:</label>
               <input th:field="*{username}" type="text" class="form-control"

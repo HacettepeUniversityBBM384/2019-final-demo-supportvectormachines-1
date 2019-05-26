@@ -4,6 +4,9 @@ import com.svms.sepetle.model.Product;
 import com.svms.sepetle.model.User;
 import com.svms.sepetle.service.ProductService;
 import com.svms.sepetle.service.UserService;
+import com.svms.sepetle.utils.Encoder;
+import com.svms.sepetle.utils.Roles;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,6 +95,69 @@ public class AdminController {
         return "edit_seller";
     }
     
+    @RequestMapping(value="/admin/editCustomer/{id}", method = RequestMethod.GET)
+    public String showUpdateCustomerForm(@PathVariable("id") int id, Model model) {
+
+        User o_user = userService.findById(id);
+        model.addAttribute("user", o_user);
+        return "edit_customer";
+    }
+    
+    @PostMapping("/admin/updateCustomer/{id}")
+ 	public String updateCustomer(@PathVariable("id") int id, @ModelAttribute("user") User user, Model model,
+                              final RedirectAttributes redirectAttributes) {
+     	  User oldUser = userService.findById(id);
+     	  String oldPassword = oldUser.getPassword();
+ 	      user.setRole(oldUser.getRole());
+ 		  userService.update(user);
+ 	      if(user.getPassword() == "") {
+ 	    	  user.setPassword(oldPassword);
+ 	      } else {
+ 	    	  if(user.getPassword().length() < 8) {
+ 	         	 redirectAttributes.addFlashAttribute("err", "invalid-pass");
+ 	         	 user.setPassword(oldPassword);
+ 	         	 userService.save(user);
+ 	             return "redirect:/admin/customer";	
+ 	         }
+ 	    	  user.setPassword(Encoder.getInstance().passwordEncoder.encode(user.getPassword()));
+ 	      }
+ 	      
+ 	      userService.save(user);
+ 	      
+ 	      System.out.println(user.toString());
+ 		  model.addAttribute("msg", "success");
+ 		  return "edit_customer";
+ 	  }
+     
+    
+    @PostMapping("/admin/updateSeller/{id}")
+ 	public String updateSeller(@PathVariable("id") int id, @ModelAttribute("user") User user, Model model,
+                              final RedirectAttributes redirectAttributes) {
+     	  User oldUser = userService.findById(id);
+     	  String oldPassword = oldUser.getPassword();
+ 	      user.setRole(oldUser.getRole());
+ 		  userService.update(user);
+ 	      if(user.getPassword() == "") {
+ 	    	  user.setPassword(oldPassword);
+ 	      } else {
+ 	    	  if(user.getPassword().length() < 8) {
+ 	         	 redirectAttributes.addFlashAttribute("err", "invalid-pass");
+ 	         	 user.setPassword(oldPassword);
+ 	         	 userService.save(user);
+ 	             return "redirect:/admin/edit_seller";	
+ 	         }
+ 	    	  user.setPassword(Encoder.getInstance().passwordEncoder.encode(user.getPassword()));
+ 	      }
+ 	      
+ 	      userService.save(user);
+ 	      
+ 	      System.out.println(user.toString());
+ 		  model.addAttribute("msg", "success");
+ 		  return "edit_seller";
+ 	  }
+         
+    
+    
     @GetMapping("/admin/removeProduct/{id}")
     public ModelAndView removeProduct(@PathVariable("id") Long id, @ModelAttribute("product") Product product, Model model,
                                       final RedirectAttributes redirectAttributes) {
@@ -103,4 +169,21 @@ public class AdminController {
 
         return new ModelAndView("redirect:/admin");
     }
+    
+    @GetMapping("/admin/removeSeller/{id}")
+    public ModelAndView removeSeller(@PathVariable("id") int id, @ModelAttribute("user") User user, Model model,
+                                      final RedirectAttributes redirectAttributes) {
+
+        userService.delete(id);
+        return new ModelAndView("redirect:/admin/seller");
+    }
+    
+    
+    @GetMapping("/admin/removeCustomer/{id}")
+    public ModelAndView removeCustomer(@PathVariable("id") int id, @ModelAttribute("user") User user, Model model,
+                                      final RedirectAttributes redirectAttributes) {
+
+        userService.delete(id);
+        return new ModelAndView("redirect:/admin/customer");
+    }    
 }

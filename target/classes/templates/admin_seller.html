@@ -37,12 +37,11 @@
                 </p>
             </div>
         </div>
-
         <!-- Navigation -->
         <div id="navigation">
             <ul>
-                <li><a href="#"  class="active"><span>Sellers</span></a></li>
-                <li><a href="#"><span>News Articles</span></a></li>
+                <li><a th:href="@{/admin/seller}"  class="active"><span>Seller</span></a></li>
+                <li><a th:href="@{/admin/customer}"><span>Customer</span></a></li>
                 <li><a th:href="@{/admin}"><span>Product Management</span></a></li>
                 <li><a href="#"><span>Photo Gallery</span></a></li>
                 <li><a href="#"><span>Products</span></a></li>
@@ -77,6 +76,7 @@
                     <p class="card-text">[[${user.username}]] Burada gördüğümüz ürünün adı eli belinde olup, çok nadir bir 
                     parçadır kendisi. Bunu dokuyan çocuk kör oldu, ürünün fiyatı çocuğun ameliyat masrafları dahil 10.000 lira.</p>
                     <a th:href="@{/admin/editSeller/{id}(id=${user.id})}" class="card-link">Update</a>
+					<a th:href="@{/admin/removeSeller/{id}(id=${user.id})}" class="card-link">Remove</a>
                 </div>
             </div>
         </div>

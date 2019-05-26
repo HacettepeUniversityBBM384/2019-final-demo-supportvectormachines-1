@@ -111,6 +111,13 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
         </dependency>
+   	<!-- this dependency makes application run in zeks computer!-->
+	<dependency>
+		<groupId>org.javassist</groupId>
+		<artifactId>javassist</artifactId>
+		<version>3.25.0-GA</version>
+	</dependency>   
+   
     </dependencies>
 
     <build>

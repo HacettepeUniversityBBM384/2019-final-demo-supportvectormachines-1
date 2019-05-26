@@ -87,9 +87,8 @@ public class UserController {
     	  
     	  User oldUser = userService.findById(id);
     	  String oldPassword = oldUser.getPassword();
-    	  
+	      user.setRole(oldUser.getRole());
 		  userService.update(user);
-	      user.setRole(Roles.ROLE_USER.getValue());
 	      System.out.println(user.toString());
 	      if(user.getPassword() == "") {
 	    	  user.setPassword(oldPassword);
