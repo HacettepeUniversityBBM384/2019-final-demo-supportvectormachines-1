@@ -70,6 +70,14 @@ public class UserController {
 
         return "redirect:/register";
     }
+	
+    @RequestMapping(value="/help", method = RequestMethod.GET)
+    public String showHelpPage(Model model) {
+    	
+	      return "help";
+    }
+	
+	
     
     @RequestMapping(value="/user/edit", method = RequestMethod.GET)
     public String showUpdateForm(Model model) {
