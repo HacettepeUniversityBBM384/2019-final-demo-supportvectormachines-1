@@ -1,24 +1,28 @@
+DROP SCHEMA if EXISTS sepetle;
+CREATE SCHEMA if not EXISTS sepetle;
+USE sepetle;
+
 CREATE TABLE `user` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) DEFAULT NULL,
-  `firstname` varchar(50) DEFAULT NULL,
-  `lastname` varchar(100) NOT NULL,
-  `age` int NOT NULL,
-  `password` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
+	`id` int NOT NULL AUTO_INCREMENT,
+	`username` varchar(50) NOT NULL,
+	`firstname` varchar(50) DEFAULT NULL,
+	`lastname` varchar(100) DEFAULT NULL,
+	`age` int(11) DEFAULT NULL,
+	`password` varchar(100) NOT NULL,
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `product` (
-  `product_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) DEFAULT NULL,
-  `description` varchar(500) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `price` float DEFAULT NULL,
-   PRIMARY KEY (`product_id`)
+	`product_id` int NOT NULL AUTO_INCREMENT,
+	`name` varchar(200) DEFAULT NULL,
+	`description` varchar(500) DEFAULT NULL,
+	`price` float DEFAULT NULL,
+	`quantity` int(11) DEFAULT NULL,
+	`rate` float DEFAULT 5,
+	`review_count` int DEFAULT 1, 
+	PRIMARY KEY (`product_id`)
 );
 
-INSERT INTO `product` (`product_id`, `name`, `description`, `quantity`, `price`, `url`) 
-VALUES ('Betta Fish', 'The Siamese fighting fish (Betta splendens), also known as the betta.', 10, 80,
-);
 
-ALTER TABLE `product` ADD `rate` INT(11) NULL DEFAULT 0;
+INSERT INTO product (product_id, name, description, quantity, price, rate, review_count)  VALUES (1,'Betta Fish', 'The Siamese fighting fish (Betta splendens), also known as the betta.', 10, 80,5,1 );
+
