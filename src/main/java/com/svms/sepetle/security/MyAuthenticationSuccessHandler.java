@@ -43,6 +43,8 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
             return "/admin";
         } else if (isUser(roles)) {
             return "/home";
+        } else if (isSeller(roles)) {
+            return "/seller";
         } else {
         	System.out.println("ERROR");
             return "/login?error";
@@ -65,5 +67,8 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
 
     private boolean isAdmin(List<String> roles) {
         return roles.contains("ROLE_ADMIN");
+    }
+    private boolean isSeller(List<String> roles) {
+        return roles.contains("ROLE_SELLER");
     }
 }
