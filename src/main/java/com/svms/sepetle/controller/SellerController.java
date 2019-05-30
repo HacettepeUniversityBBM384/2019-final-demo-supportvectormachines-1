@@ -41,6 +41,51 @@ public class SellerController {
         return modelAndView;
 
     }
+    
+    @RequestMapping(value="/seller/editProduct/{id}", method = RequestMethod.GET)
+    public String showUpdateProductForm(@PathVariable("id") Long id, Model model) {
+
+        Optional<Product> o_product = productService.findById(id);
+        Product product = o_product.get();
+
+        model.addAttribute("product", product);
+        return "seller_edit_product";
+    }
+    
+    @PostMapping("/seller/updateProduct/{id}")
+    public ModelAndView updateProduct(@PathVariable("id") Long id, @ModelAttribute("product") Product product, Model model,
+                             final RedirectAttributes redirectAttributes) {
+
+        Optional<Product> o_oldProduct = productService.findById(id);
+        Product oldProduct = o_oldProduct.get();
+
+        product.setDescription(oldProduct.getDescription());
+        product.setRate(oldProduct.getRate());
+        product.setReview_count(oldProduct.getReview_count());
+
+        productService.save(product);
+
+        return new ModelAndView("redirect:/seller");
+        
+    }
+    
+    @GetMapping("/seller/removeProduct/{id}")
+    public ModelAndView removeProduct(@PathVariable("id") Long id, @ModelAttribute("product") Product product, Model model,
+                                      final RedirectAttributes redirectAttributes) {
+
+        Optional<Product> o_oldProduct = productService.findById(id);
+        Product oldProduct = o_oldProduct.get();
+
+        productService.delete(oldProduct);
+
+        return new ModelAndView("redirect:/seller");
+    }
+    
+    /*@PostMapping("/seller/addProduct/{productId}")
+    public ModelAndView addProductToCart(@PathVariable("productId") Long productId) {
+        productService.findById(productId).ifPresent(cartService::addProduct);
+        return new ModelAndView("redirect:/shoppingCart");
+    }*/
 
  
 }
