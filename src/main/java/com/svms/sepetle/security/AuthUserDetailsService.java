@@ -64,6 +64,9 @@ public class AuthUserDetailsService implements UserDetailsService {
         } else if (role == 2) {
             authList.add(new SimpleGrantedAuthority("ROLE_USER"));
         }
+        else if (role == 3) {
+            authList.add(new SimpleGrantedAuthority("ROLE_SELLER"));
+        }
 
         return authList;
     }
