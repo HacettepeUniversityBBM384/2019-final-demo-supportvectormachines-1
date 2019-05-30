@@ -20,10 +20,10 @@
     <div class="shell">
 
         <div id="head">
-            <h1><a href="#">Sepetle Admin</a></h1>
+            <h1><a href="#">Sepetle Seller</a></h1>
             <div class="right">
                 <p>
-                    Welcome <a href="#"><strong>Administrator</strong></a> |
+                    Welcome <a href="#"><strong>Seller</strong></a> |
                     <a href="#">Help</a> |
                     <a href="#">Profile Settings</a> |
                 <form th:action="@{/logout}" method="post">
@@ -41,12 +41,11 @@
         <!-- Navigation -->
         <div id="navigation">
             <ul>
-                <li><a th:href="@{/admin/seller}" ><span>Seller</span></a></li>
-                <li><a th:href="@{/admin/customer}"><span>Customer</span></a></li>
-                <li><a th:href="@{/admin}" class="active"><span>Product Management</span></a></li>
-                <li><a href="#"><span>Photo Gallery</span></a></li>
-                <li><a href="#"><span>Products</span></a></li>
-                <li><a href="#"><span>Services Control</span></a></li>
+               
+                <li><a th:href="@{/seller}" class="active"><span>Update Product</span></a></li>
+                <li><a href="#"><span>Add Product</span></a></li>
+                <li><a href="#"><span>Add Sales</span></a></li>
+                
             </ul>
         </div>
         <!-- End Navigation -->
@@ -84,8 +83,8 @@
                             th:text="${product.name}"></p></a></h4>
                     <h6 class="card-subtitle mb-2 text-muted">Price: $[[${product.price}]] | Quantity: [[${product.quantity}]]</h6>
                     <p class="card-text">[[${product.description}]] Didem çok zekidir.</p>
-                    <a th:href="@{/admin/editProduct/{id}(id=${product.id})}" class="card-link">Update</a>
-                    <a th:href="@{/admin/removeProduct/{id}(id=${product.id})}" class="card-link">Remove</a>
+                    <a th:href="@{/seller/editProduct/{id}(id=${product.id})}" class="card-link">Update</a>
+                    <a th:href="@{/seller/removeProduct/{id}(id=${product.id})}" class="card-link">Remove</a>
 
                 </div>
             </div>
