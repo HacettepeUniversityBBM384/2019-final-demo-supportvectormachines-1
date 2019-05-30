@@ -43,10 +43,10 @@ create table `address` (
 	`id` int unsigned not null auto_increment,
 	`user_id` int not null,
 	`place` varchar(500) not null,	
-	primary key (`id`)
---	foreign key (`user_id`) references `user` (`id`)
---		on delete cascade
---		on update no action
+	primary key (`id`),
+	foreign key (`user_id`) references `user` (`id`)
+		on delete cascade
+		on update no action
 );
 
 
