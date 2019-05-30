@@ -41,7 +41,7 @@ create table `user` (
 
 create table `address` (
 	`id` int unsigned not null auto_increment,
-	`user_id` int not null,
+	`user_id` int unsigned,
 	`place` varchar(500) not null,	
 	primary key (`id`),
 	foreign key (`user_id`) references `user` (`id`)
