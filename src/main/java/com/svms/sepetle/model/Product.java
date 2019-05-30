@@ -26,6 +26,10 @@ public class Product {
     @Column(name = "description")
     private String description;
 
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Category category;
+
     @Column(name = "quantity", nullable = false)
     @Min(value = 0, message = "*Quantity has to be non negative number")
     private Integer quantity;
