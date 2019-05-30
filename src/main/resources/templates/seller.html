@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}"/>
+
+
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+</head>
+<body>
+<!-- Header -->
+<div id="header">
+    <div class="shell">
+
+        <div id="head">
+            <h1><a href="#">Sepetle Admin</a></h1>
+            <div class="right">
+                <p>
+                    Welcome <a href="#"><strong>Administrator</strong></a> |
+                    <a href="#">Help</a> |
+                    <a href="#">Profile Settings</a> |
+                <form th:action="@{/logout}" method="post">
+                    <input class="btn btn-xs btn-danger" type="submit" value="Sign Out" style="
+    padding-bottom: 3px;
+    padding-top: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+"/>
+                </form>
+                </p>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div id="navigation">
+            <ul>
+                <li><a th:href="@{/admin/seller}" ><span>Seller</span></a></li>
+                <li><a th:href="@{/admin/customer}"><span>Customer</span></a></li>
+                <li><a th:href="@{/admin}" class="active"><span>Product Management</span></a></li>
+                <li><a href="#"><span>Photo Gallery</span></a></li>
+                <li><a href="#"><span>Products</span></a></li>
+                <li><a href="#"><span>Services Control</span></a></li>
+            </ul>
+        </div>
+        <!-- End Navigation -->
+
+    </div>
+</div>
+<!-- End Header -->
+
+
+<!-- Content -->
+<div id="content" class="shell">
+
+    <!-- Help Navigation -->
+    <div id="help-nav">
+        <a href="#">Dashboard</a> &gt; Current Products
+    </div>
+    <!-- End Help Navigation -->
+
+    <!--    <div class="message thank-message">-->
+    <!--        <p><strong>Congratulations your information has been submited!</strong></p>-->
+    <!--    </div>-->
+
+    <!--    <div class="message error-message">-->
+    <!--        <p><strong>Error! The following fields were not entred correctly...</strong></p>-->
+    <!--    </div>-->
+
+    <div class="card" th:each="product : ${products}">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <img th:src="@{'../../static/images/product_' + ${product.id} + '.jpg'}" height="148" width='138'>
+                </div>
+                <div class="col-md-10">
+                    <h4 class="card-title"><a th:text="${product.name}" th:href="@{'/product/' + ${product.id}}"><p
+                            th:text="${product.name}"></p></a></h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Price: $[[${product.price}]] | Quantity: [[${product.quantity}]]</h6>
+                    <p class="card-text">[[${product.description}]] Didem çok zekidir.</p>
+                    <a th:href="@{/admin/editProduct/{id}(id=${product.id})}" class="card-link">Update</a>
+                    <a th:href="@{/admin/removeProduct/{id}(id=${product.id})}" class="card-link">Remove</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--            <form th:object="${product}"-->
+    <!--                  th:action="@{/shoppingCart/addProduct/{productId}(productId=${product.id})}" method="post">-->
+    <!--                <a sec:authorize="isAuthenticated()" th:if="${product.quantity}>0">-->
+    <!--                    <button type="submit">Add to cart</button>-->
+    <!--                </a>-->
+    <!--            </form>-->
+
+</div>
+<!-- End Content -->
+
+<!-- Footer -->
+<div id="footer">
+    <p>&copy; Sepetle.com. Design by <a href="http://sepetle.com">Sepetle.com</a></p>
+</div>
+<!-- End Footer -->
+</body>
+</html>
