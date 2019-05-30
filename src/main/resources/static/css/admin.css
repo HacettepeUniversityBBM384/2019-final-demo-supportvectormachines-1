@@ -28,6 +28,7 @@ h5 { font-size:14px; line-height:18px; }
 h6 { font-size:12px; line-height:16px; padding-bottom:5px; }
 
 #header { background:#364f86; height:82px; }
+#header-seller { background:#25ac52; height:82px; }
 #header h1{ float:left; white-space:nowrap; padding-top:8px; font-size:25px; line-height:35px; color:#fff;}
 #header a{ color:#fff }
 #header a:hover{ color:#a1adc7; }
