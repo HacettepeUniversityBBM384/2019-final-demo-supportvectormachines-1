@@ -80,7 +80,6 @@ create table `customer` (
 create table `category` (
 	`id` int unsigned not null auto_increment,
 	`name` varchar(20) not null,
-	`image` varchar(100) default null,
 	primary key (`id`)
 );
 
@@ -101,7 +100,7 @@ create table offer (
 /* Add brand coulumn? */
 
 create table `product` (
-	`product_id` int unsigned not null auto_increment,
+	`id` int unsigned not null auto_increment,
 	`seller_id` int unsigned not null, 
 	`category_id` int unsigned default null,
 	`name` varchar(200) default null,
@@ -111,7 +110,7 @@ create table `product` (
 	`price` float default null,
 	`rate` float default 5,
 	`review_count` int(11) default 1,
-	primary key (`product_id`),
+	primary key (`id`),
 	foreign key (`seller_id`) references `user` (`id`)
 		on delete cascade
 		on update no action,

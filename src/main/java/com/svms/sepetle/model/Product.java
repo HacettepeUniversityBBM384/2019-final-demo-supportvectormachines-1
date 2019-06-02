@@ -16,7 +16,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "product_id", unique = true, nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
     @Column(name = "name", nullable = false, unique = true)
@@ -25,6 +25,10 @@ public class Product {
 
     @Column(name = "description")
     private String description;
+
+    @JoinColumn(name = "seller_id", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private User seller;
 
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
@@ -45,6 +49,14 @@ public class Product {
     @Column(name = "price", nullable = false)
     @DecimalMin(value = "0.00", message = "*Price has to be non negative number")
     private BigDecimal price;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public Long getId() {
         return id;
@@ -117,4 +129,11 @@ public class Product {
         return id.hashCode();
     }
 
+    public User getSeller() {
+        return seller;
+    }
+
+    public void setSeller(User seller) {
+        this.seller = seller;
+    }
 }

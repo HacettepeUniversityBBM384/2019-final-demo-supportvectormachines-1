@@ -1,14 +1,17 @@
 package com.svms.sepetle.model;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
 
 
-
+@Entity
+@DynamicUpdate
+@Table(name = "category", schema = "sepetledb")
 public class Category {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

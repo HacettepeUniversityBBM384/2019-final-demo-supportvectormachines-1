@@ -21,7 +21,6 @@ import java.util.Optional;
 @Controller
 public class SellerController {
 
-
     @Autowired
     AppController globalController;
 
@@ -33,7 +32,9 @@ public class SellerController {
     
     @RequestMapping("/seller")
     public ModelAndView homeAdmin() {
-        Collection<Product> products = productService.findAll();
+
+        int seller_id = globalController.getLoginUser().getId();
+        Collection<Product> products = productService.getProductsBySeller(seller_id);
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("products", products);

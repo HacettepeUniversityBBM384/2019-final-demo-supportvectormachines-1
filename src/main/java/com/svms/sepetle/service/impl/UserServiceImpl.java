@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public  Collection<User>  findSellers() {
+    public  Collection<User> findSellers() {
     	Collection<User> users = this.findAll();
     	Collection<User> sellers = new ArrayList<User>();
     	for(User user : users){
@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public  Collection<User>  findCustomers() {
+    public  Collection<User> findCustomers() {
     	Collection<User> users = this.findAll();
     	Collection<User> customers = new ArrayList<User>();
     	for(User user : users){
@@ -85,7 +85,6 @@ public class UserServiceImpl implements UserService {
     	return customers;
     }
 
-    
     @Override
     public Collection<User> findAll() {
         Iterable<User> itr = userRepository.findAll();
