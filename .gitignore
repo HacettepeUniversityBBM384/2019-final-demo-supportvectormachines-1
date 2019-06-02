@@ -1,0 +1,5 @@
+# this is used for not updating specific files
+#################################################
+
+#application proporties
+./src/main/resources/*.properties

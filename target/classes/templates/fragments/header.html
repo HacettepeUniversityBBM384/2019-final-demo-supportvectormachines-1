@@ -39,6 +39,10 @@
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
     </div>
+    
+    
+    
+    
 </head>
 <body>
 <div th:fragment="header">
@@ -96,7 +100,7 @@
                             Shopping Cart
                         </button>
                     </a>
-                </li>
+                </li> 
 
             </ul>
 
@@ -108,6 +112,16 @@
                             <i class="fa fa-edit">
                             </i>
                             Update Information
+                        </button>
+                    </a>
+                </li>
+                
+                <li sec:authorize="isAuthenticated()" class="nav-item active">
+                    <a class="btn icon-btn" th:href="@{/help}">
+                        <button type="button" class="btn btn-info">
+                            <i class="fa fa-help">
+                            </i>
+                            Help
                         </button>
                     </a>
                 </li>
