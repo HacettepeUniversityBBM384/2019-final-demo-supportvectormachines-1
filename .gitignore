@@ -3,3 +3,4 @@
 
 #application proporties
 ./src/main/resources/*.properties
+./target/
