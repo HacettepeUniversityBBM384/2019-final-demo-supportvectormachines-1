@@ -32,7 +32,6 @@
 /*********************************
 2. Body and some general stuff
 *********************************/
-
 * {
 	margin: 0;
 	padding: 0;
@@ -46,7 +45,6 @@ html, body {
 }
 
 header {
-	width: 95%;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
