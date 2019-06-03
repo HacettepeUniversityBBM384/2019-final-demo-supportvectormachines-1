@@ -56,7 +56,8 @@ public class CartServiceImpl implements CartService {
             // Refresh quantity for every product before checking
             product = productRepository.getOne(entry.getKey().getId());
             if (product.getQuantity() < entry.getValue()) {
-                System.out.println(String.format("Not enough %s products in stock. Only %d left", product.getName(), product.getQuantity()));;
+                System.out.println(String.format("Not enough %s products in stock. Only %d left",
+                        product.getName(), product.getQuantity()));;
             }
             entry.getKey().setQuantity(product.getQuantity() - entry.getValue());
         }
