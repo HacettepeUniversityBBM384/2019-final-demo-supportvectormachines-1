@@ -3,4 +3,6 @@
 
 #application proporties
 ./src/main/resources/*.properties
-./target/
+./target/*
+./DS_Store
+./idea/*
