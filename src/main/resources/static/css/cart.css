@@ -85,7 +85,7 @@ a:hover {
     padding-top: 1em;
 }
 .product_cart .title, .product_cart .tier, .product_cart .attr, .product_cart .renews {
-    float: left;
+    margin-left: -9px;
     clear: left;
 }
 .product_cart .price, .product_cart .term {

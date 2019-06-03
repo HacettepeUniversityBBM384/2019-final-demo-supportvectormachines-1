@@ -8,33 +8,74 @@
 
 <div class="products" th:fragment="products">
 
-    <div style="margin-left: 20px; margin-top: -25px" class="py-1 text-left">
-        <h2>Products </h2>
-    </div>
 
-    <div class='row'>
-        <div class='product--black' th:each="product : ${products}">
-            <div class='product_inner'>
-                <img th:src="@{'../../static/images/product_' + ${product.id} + '.jpg'}" width='300'>
-                <a th:text="${product.name}" th:href="@{'/product/' + ${product.id}}"><p
-                        th:text="${product.name}"></p></a>
-                <div th:inline="text">Price: $[[${product.price}]]</div>
-                <div th:inline="text">In Stock: [[${product.quantity}]]</div>
 
-                <form th:object="${product}"
-                      th:action="@{/shoppingCart/addProduct/{productId}(productId=${product.id})}" method="post">
-                        <a sec:authorize="isAuthenticated()" th:if="${product.quantity}>0">
-                            <button type="submit">Add to cart</button>
-                        </a>
-                </form>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="card">
+                <article class="card-group-item">
+                    <header class="card-header"><h6 class="title">Category</h6></header>
+                    <div class="filter-content">
+                        <div class="list-group list-group-flush">
+                            <a href="#" class="list-group-item">Cras justo odio <span class="float-right badge badge-light round">142</span> </a>
+                            <a href="#" class="list-group-item">Dapibus ac facilisis  <span class="float-right badge badge-light round">3</span>  </a>
+                            <a href="#" class="list-group-item">Morbi leo risus <span class="float-right badge badge-light round">32</span>  </a>
+                            <a href="#" class="list-group-item">Another item <span class="float-right badge badge-light round">12</span>  </a>
+                        </div>  <!-- list-group .// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
+            </div> <!-- card.// -->
+
+            <br>
+            <br>
+
+            <div class="well well-small alert alert-warning cntr">
+                <h2>50% Discount</h2>
+                <p>
+                    only valid for online order. <br><br><a class="defaultBtn" href="#">Click here </a>
+                </p>
             </div>
 
-            <div class='product_overlay'>
-                <h2>Added to cart</h2>
-                <i class='fa fa-check'></i>
-            </div>
         </div>
+
+        <div class='col-md-9'>
+            <div style="margin-left: 20px; margin-top: -15px" class="py-2 text-left">
+                <h1>Products </h1>
+
+            </div>
+
+            <div class="flex" style="margin-top: -5px">
+                <section class="shadow-lg" th:each="product : ${products}">
+
+                    <img style="width: 250px;" th:src="@{'../../static/images/product_' + ${product.id} + '.jpg'}" width='300'>
+
+                    <a class="title" th:text="${product.name}" th:href="@{'/product/' + ${product.id}}"><h2
+                            th:text="${product.name}"></h2></a>
+                        <aside>
+                            <ul>
+                                <li>Price: $[[${product.price}]]</li>
+                                <li>In Stock: [[${product.quantity}]]</li>
+                            </ul>
+                        </aside>
+
+                        <form th:object="${product}"
+                              th:action="@{/shoppingCart/addProduct/{productId}(productId=${product.id})}" method="post">
+                            <a sec:authorize="isAuthenticated()" th:if="${product.quantity}>0">
+                                <button class="button-cart" type="submit"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                            </a>
+                        </form>
+
+                </section>
+            </div>
+
+        </div>
+
     </div>
+</div>
+
+
 </div>
 
 </body>
