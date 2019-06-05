@@ -13,16 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class ProductController {
 
     private final ProductService productService;
-    CategoryService categoryService;
+    private final CategoryService categoryService;
 
     @Autowired
     public ProductController(ProductService productService, CategoryService categoryService) {
@@ -30,16 +27,16 @@ public class ProductController {
         this.categoryService = categoryService;
     }
 
-    @RequestMapping("/{category}")
+    @RequestMapping("/category/{category}")
     public String filterProducts(@PathVariable("category") String productCategory, Model model) {
 
         Category category = categoryService.findByName(productCategory);
+        Collection<Category> categories = categoryService.findAll();
 
         List<Product> productsByCategory = productService.getProductsByCategory(category);
 
-        System.out.println(productsByCategory);
-
         model.addAttribute("products", productsByCategory);
+        model.addAttribute("categories", categories);
 
         return "home";
     }

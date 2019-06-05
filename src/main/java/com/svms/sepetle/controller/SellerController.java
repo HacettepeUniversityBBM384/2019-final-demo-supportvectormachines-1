@@ -81,12 +81,25 @@ public class SellerController {
 
         return new ModelAndView("redirect:/seller");
     }
-    
-    /*@PostMapping("/seller/addProduct/{productId}")
-    public ModelAndView addProductToCart(@PathVariable("productId") Long productId) {
-        productService.findById(productId).ifPresent(cartService::addProduct);
-        return new ModelAndView("redirect:/shoppingCart");
-    }*/
+
+    @RequestMapping("/seller/addProduct")
+    public String addProduct(Model model) {
+        model.addAttribute("rProduct", new Product());
+        return "seller";
+    }
+
+    @RequestMapping(value = {"/seller/saveProduct"}, method = RequestMethod.POST)
+    public String register(@ModelAttribute("rProduct") Product rProduct,
+                           final RedirectAttributes redirectAttributes) {
+
+        if (productService.save(rProduct) != null) {
+            redirectAttributes.addFlashAttribute("saveUser", "success");
+        } else {
+            redirectAttributes.addFlashAttribute("saveUser", "fail");
+        }
+
+        return "redirect:/register";
+    }
 
  
 }
