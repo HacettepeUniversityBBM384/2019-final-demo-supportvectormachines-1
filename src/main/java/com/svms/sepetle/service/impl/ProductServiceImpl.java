@@ -64,15 +64,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProductsBySeller(int s_id) {
 
-        List<Product> productsByManufacturer = new ArrayList<>();
+        List<Product> productsBySeller = new ArrayList<>();
 
         for(Product product: productRepository.findAll()) {
             System.out.println(s_id + " " + product.getSeller());
             if(product.getSeller().getId() == s_id){
-                productsByManufacturer.add(product);
+                productsBySeller.add(product);
             }
         }
-        System.out.println(productsByManufacturer);
-        return productsByManufacturer;
+        System.out.println(productsBySeller);
+        return productsBySeller;
     }
 }
