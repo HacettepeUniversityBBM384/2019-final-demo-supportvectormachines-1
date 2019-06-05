@@ -67,8 +67,8 @@ public class ProductServiceImpl implements ProductService {
         List<Product> productsBySeller = new ArrayList<>();
 
         for(Product product: productRepository.findAll()) {
-            System.out.println(s_id + " " + product.getSeller());
             if(product.getSeller().getId() == s_id){
+                System.out.println(product.getId() + " " + product.getSeller());
                 productsBySeller.add(product);
             }
         }

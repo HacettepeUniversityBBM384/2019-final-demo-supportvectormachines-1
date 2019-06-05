@@ -76,8 +76,6 @@ public class UserController {
     	
 	      return "help";
     }
-	
-	
     
     @RequestMapping(value="/user/edit", method = RequestMethod.GET)
     public String showUpdateForm(Model model) {
@@ -91,6 +89,7 @@ public class UserController {
     @PostMapping("/user/update/{id}")
 	public String updateUser(@PathVariable("id") int id, @ModelAttribute("user") User user, Model model,
                              final RedirectAttributes redirectAttributes) {
+
     	  System.out.println(user.toString());
     	  
     	  User oldUser = userService.findById(id);

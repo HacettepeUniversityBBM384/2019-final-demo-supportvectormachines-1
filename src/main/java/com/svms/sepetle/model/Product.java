@@ -27,7 +27,7 @@ public class Product {
     private String description;
 
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     private User seller;
 
     @JoinColumn(name = "category_id", referencedColumnName = "id")

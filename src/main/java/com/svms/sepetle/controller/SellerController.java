@@ -1,8 +1,10 @@
 package com.svms.sepetle.controller;
 
 
+import com.svms.sepetle.model.Category;
 import com.svms.sepetle.model.Product;
 import com.svms.sepetle.model.User;
+import com.svms.sepetle.service.CategoryService;
 import com.svms.sepetle.service.ProductService;
 import com.svms.sepetle.service.UserService;
 import com.svms.sepetle.utils.Encoder;
@@ -28,7 +30,10 @@ public class SellerController {
     ProductService productService;
 
     @Autowired
-    UserService userService;   
+    UserService userService;
+
+    @Autowired
+    CategoryService categoryService;
     
     @RequestMapping("/seller")
     public ModelAndView homeAdmin() {
@@ -45,17 +50,19 @@ public class SellerController {
     
     @RequestMapping(value="/seller/editProduct/{id}", method = RequestMethod.GET)
     public String showUpdateProductForm(@PathVariable("id") Long id, Model model) {
-
         Optional<Product> o_product = productService.findById(id);
         Product product = o_product.get();
+        Collection<Category> categories = categoryService.findAll();
 
         model.addAttribute("product", product);
+        // model.addAttribute("category", new Category());
+        model.addAttribute("categories", categories);
+
         return "seller_edit_product";
     }
     
     @PostMapping("/seller/updateProduct/{id}")
-    public ModelAndView updateProduct(@PathVariable("id") Long id, @ModelAttribute("product") Product product, Model model,
-                             final RedirectAttributes redirectAttributes) {
+    public ModelAndView updateProduct(@PathVariable("id") Long id, @ModelAttribute("product") Product product) {
 
         Optional<Product> o_oldProduct = productService.findById(id);
         Product oldProduct = o_oldProduct.get();
@@ -63,7 +70,7 @@ public class SellerController {
         product.setDescription(oldProduct.getDescription());
         product.setRate(oldProduct.getRate());
         product.setReview_count(oldProduct.getReview_count());
-
+        product.setSeller(oldProduct.getSeller());
         productService.save(product);
 
         return new ModelAndView("redirect:/seller");
@@ -85,7 +92,7 @@ public class SellerController {
     @RequestMapping("/seller/addProduct")
     public String addProduct(Model model) {
         model.addAttribute("rProduct", new Product());
-        return "seller";
+        return "seller_add_product";
     }
 
     @RequestMapping(value = {"/seller/saveProduct"}, method = RequestMethod.POST)
@@ -98,7 +105,7 @@ public class SellerController {
             redirectAttributes.addFlashAttribute("saveUser", "fail");
         }
 
-        return "redirect:/register";
+        return "redirect:/seller";
     }
 
  
