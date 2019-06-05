@@ -31,7 +31,7 @@ public class Product {
     private User seller;
 
     @JoinColumn(name = "category_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     private Category category;
 
     @Column(name = "quantity", nullable = false)

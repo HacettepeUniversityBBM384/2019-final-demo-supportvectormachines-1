@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}"/>
+
+
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+</head>
+<body>
+<!-- Header -->
+<div id="header">
+    <div class="shell">
+
+        <div id="head">
+            <h1><a href="#">Sepetle Admin</a></h1>
+            <div class="right">
+                <p>
+                    Welcome <a href="#"><strong>Administrator</strong></a> |
+                    <a href="#">Help</a> |
+                    <a href="#">Profile Settings</a> |
+                <form th:action="@{/logout}" method="post">
+                    <input class="btn btn-xs btn-danger" type="submit" value="Sign Out" style="
+    padding-bottom: 3px;
+    padding-top: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+"/>
+                </form>
+                </p>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div id="navigation">
+            <ul>
+                <li><a th:href="@{/admin/seller}"><span>Seller</span></a></li>
+                <li><a th:href="@{/admin/customer}" class="active"><span>Customer</span></a></li>
+                <li><a th:href="@{/admin}" ><span>Product Management</span></a></li>
+                <li><a href="#"><span>Photo Gallery</span></a></li>
+                <li><a href="#"><span>Products</span></a></li>
+                <li><a href="#"><span>Services Control</span></a></li>
+            </ul>
+        </div>
+        <!-- End Navigation -->
+
+    </div>
+</div>
+<!-- End Header -->
+
+<div class="container">
+    <h1>Edit Profile</h1>
+  	<hr>
+	<div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img width="90%" src="https://www.29mayis.edu.tr/public/images/default-profile.png" class="avatar img-circle" alt="avatar">
+          <h6>Upload a different photo...</h6>
+
+          <input type="file" class="form-control">
+        </div>
+      </div>
+
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+          <div th:if="${msg eq 'success'}" class="alert alert-success alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert"
+                      aria-hidden="true">&times;
+              </button>
+              <strong>Success! </strong> Your information has been updated.
+          </div>
+          
+          <div th:if="${err eq 'invalid-pass'}" class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert"
+                            aria-hidden="true">&times;</button>
+                    <strong>Error!</strong> The password must be at least 8 characters in length!
+                </div>
+
+        <form th:object="${user}" th:action="@{/admin/updateCustomer/{id}(id=${user.id})}" method="post">
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Username:</label>
+              <input th:field="*{username}" type="text" class="form-control"
+                     required="required" placeholder="Username"/>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Password:</label>
+              <input th:field="*{password}" type="password" class="form-control"
+                     placeholder="Password"/>
+          </div>
+
+          <div class="form-group">
+              <label class="col-lg-3 control-label">E-mail:</label>
+
+              <input th:field="*{email}" type="text" class="form-control"
+                     required="required"
+                     placeholder="Email"/>
+          </div>
+
+          <div class="modal-footer">
+                <div>
+                    <button type="submit" class="btn btn-success btn-md">
+                        <i class="fa fa-paper-plane"></i>
+                        Update
+                    </button>
+                </div>
+            </div>
+        </form>
+      </div>
+  </div>
+</div>
+
+
+<!-- Footer -->
+<div id="footer">
+    <p>&copy; Sepetle.com. Design by <a href="http://sepetle.com">Sepetle.com</a></p>
+</div>
+<!-- End Footer -->
+</body>
+</html>
