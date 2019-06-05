@@ -16,14 +16,14 @@
 </head>
 <body>
 <!-- Header -->
-<div id="header">
+<div id="header-seller">
     <div class="shell">
 
         <div id="head">
-            <h1><a href="#">Sepetle Admin</a></h1>
+            <h1><a href="#">Sepetle Seller</a></h1>
             <div class="right">
                 <p>
-                    Welcome <a href="#"><strong>Administrator</strong></a> |
+                    Welcome <a href="#"><strong>Seller</strong></a> |
                     <a href="#">Help</a> |
                     <a href="#">Profile Settings</a> |
                 <form th:action="@{/logout}" method="post">
@@ -41,12 +41,11 @@
         <!-- Navigation -->
         <div id="navigation">
             <ul>
-                <li><a th:href="@{/admin/seller}" ><span>Seller</span></a></li>
-                <li><a th:href="@{/admin/customer}"><span>Customer</span></a></li>
-                <li><a th:href="@{/admin}" class="active"><span>Product Management</span></a></li>
-                <li><a href="#"><span>Photo Gallery</span></a></li>
-                <li><a href="#"><span>Products</span></a></li>
-                <li><a href="#"><span>Services Control</span></a></li>
+
+                <li><a th:href="@{/seller}" class="active"><span>Update Product</span></a></li>
+                <li><a href="#"><span>Add Product</span></a></li>
+                <li><a href="#"><span>Add Sales</span></a></li>
+
             </ul>
         </div>
         <!-- End Navigation -->
@@ -83,14 +82,25 @@
                    placeholder="Quantity"/>
         </div>
 
-        <div class="modal-footer">
-            <div>
-                <button type="submit" class="btn btn-success btn-md">
-                    <i class="fa fa-paper-plane"></i>
-                    Update
-                </button>
-            </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Category:</label>
+            <select th:field="*{category.id}" class="form-control" name="category" id="category">
+                <option th:each="category : ${categories}"
+                        th:value="${category.id}"
+                        th:selected="(${category.getId()} == ${product.getCategory().getId()})"
+                        th:text="${category.getName()}">
+                </option>
+            </select>
         </div>
+
+    <div class="modal-footer">
+        <div>
+            <button type="submit" class="btn btn-success btn-md">
+                <i class="fa fa-paper-plane"></i>
+                Update
+            </button>
+        </div>
+    </div>
     </form>
 
 </div>
