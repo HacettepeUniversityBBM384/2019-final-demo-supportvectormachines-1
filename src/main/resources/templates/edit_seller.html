@@ -15,45 +15,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 </head>
 <body>
-<!-- Header -->
-<div id="header">
-    <div class="shell">
-
-        <div id="head">
-            <h1><a href="#">Sepetle Admin</a></h1>
-            <div class="right">
-                <p>
-                    Welcome <a href="#"><strong>Administrator</strong></a> |
-                    <a href="#">Help</a> |
-                    <a href="#">Profile Settings</a> |
-                <form th:action="@{/logout}" method="post">
-                    <input class="btn btn-xs btn-danger" type="submit" value="Sign Out" style="
-    padding-bottom: 3px;
-    padding-top: 3px;
-    padding-left: 6px;
-    padding-right: 6px;
-"/>
-                </form>
-                </p>
-            </div>
-        </div>
-
-        <!-- Navigation -->
-        <div id="navigation">
-            <ul>
-                <li><a th:href="@{/admin/seller}" class="active"><span>Seller</span></a></li>
-                <li><a th:href="@{/admin/customer}"><span>Customer</span></a></li>
-                <li><a th:href="@{/admin}" ><span>Product Management</span></a></li>
-                <li><a href="#"><span>Photo Gallery</span></a></li>
-                <li><a href="#"><span>Products</span></a></li>
-                <li><a href="#"><span>Services Control</span></a></li>
-            </ul>
-        </div>
-        <!-- End Navigation -->
-
-    </div>
-</div>
-<!-- End Header -->
+	
+<div th:replace="fragments/admin_header :: header"></div>
 
 <div class="container">
     <h1>Edit Profile</h1>
