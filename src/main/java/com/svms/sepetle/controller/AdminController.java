@@ -56,6 +56,50 @@ public class AdminController {
 
     }
     
+    
+    @RequestMapping("/admin/addSeller")
+    public String addProduct(Model model) {
+        model.addAttribute("rUser", new User());
+      
+        return "add_seller";
+    }
+    
+    
+    @RequestMapping(value = {"/admin/saveSeller"}, method = RequestMethod.POST)
+    public String saveSeller(@ModelAttribute("rUser") User rUser,
+                           final RedirectAttributes redirectAttributes) {
+
+    	System.out.println(rUser.toString());
+        User user = userService.findByUserName(rUser.getUsername());
+        if (user != null) {
+            redirectAttributes.addFlashAttribute("saveUser", "exist-name");
+            return "redirect:/admin/saveSeller";
+        }
+        user = userService.findByEmail(rUser.getEmail());
+        if (user != null) {
+            redirectAttributes.addFlashAttribute("saveUser", "exist-email");
+            return "redirect:/admin/saveSeller";
+        }
+
+        if(rUser.getPassword().length() < 8) {
+        	 redirectAttributes.addFlashAttribute("saveUser", "invalid-pass");
+             return "redirect:/admin/saveSeller";	
+        }
+        
+        rUser.setPassword(Encoder.getInstance().passwordEncoder.encode(rUser.getPassword()));
+        rUser.setRole(Roles.ROLE_SELLER.getValue());
+
+        if (userService.save(rUser) != null) {
+            redirectAttributes.addFlashAttribute("saveUser", "success");
+        } else {
+            redirectAttributes.addFlashAttribute("saveUser", "fail");
+        }
+
+        return "redirect:/admin/seller";
+    }
+    
+    
+    
     @RequestMapping("/admin/customer")
     public ModelAndView customerAdmin() {
     	Collection<User> users = userService.findCustomers();
