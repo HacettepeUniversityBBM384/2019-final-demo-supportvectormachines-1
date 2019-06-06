@@ -92,6 +92,9 @@ public class SellerController {
     @RequestMapping("/seller/addProduct")
     public String addProduct(Model model) {
         model.addAttribute("rProduct", new Product());
+        Collection<Category> categories = categoryService.findAll();
+        model.addAttribute("categories", categories);
+
         return "seller_add_product";
     }
 
@@ -99,10 +102,13 @@ public class SellerController {
     public String register(@ModelAttribute("rProduct") Product rProduct,
                            final RedirectAttributes redirectAttributes) {
 
+        rProduct.setSeller(userService.findById(globalController.getLoginUser().getId()));
+        rProduct.setReview_count(0);
+        rProduct.setRate((float) 0);
         if (productService.save(rProduct) != null) {
-            redirectAttributes.addFlashAttribute("saveUser", "success");
+            redirectAttributes.addFlashAttribute("saveProduct", "success");
         } else {
-            redirectAttributes.addFlashAttribute("saveUser", "fail");
+            redirectAttributes.addFlashAttribute("saveProduct", "fail");
         }
 
         return "redirect:/seller";

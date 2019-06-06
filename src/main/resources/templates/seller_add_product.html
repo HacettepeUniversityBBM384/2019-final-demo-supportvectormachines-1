@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
+    <title>Seller Dashboard</title>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}"/>
@@ -43,7 +43,7 @@
             <ul>
 
                 <li><a th:href="@{/seller}" class="active"><span>Update Product</span></a></li>
-                <li><a href="#"><span>Add Product</span></a></li>
+                <li><a th:href="@{/seller/addProduct}"><span>Add Product</span></a></li>
                 <li><a href="#"><span>Add Sales</span></a></li>
 
             </ul>
@@ -53,22 +53,28 @@
     </div>
 </div>
 <!-- End Header -->
-
-
-<!-- Content -->
 <div id="content" class="shell">
 
     <!-- Help Navigation -->
     <div id="help-nav">
-        <a th:href="@{/seller}">Dashboard</a> &gt; Edit Product
+        <a th:href="@{/seller}">Dashboard</a> &gt; Add Product
     </div>
 
-    <form th:object="${product}" th:action="@{/seller/updateProduct/{id}(id=${product.id})}" method="post">
+    <form th:object="${rProduct}" th:action="@{/seller/saveProduct}" method="post">
         <div class="form-group">
             <label class="col-lg-3 control-label">Product Name:</label>
             <input th:field="*{name}" type="text" class="form-control"
-                   required="required" placeholder="Username"/>
+                   required="required" placeholder="Product Name"/>
         </div>
+
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Description:</label>
+
+            <textarea th:field="*{description}" placeholder="Please enter a description." class="form-control" rows="4" cols="50">
+            </textarea>
+        </div>
+
+
 
         <div class="form-group">
             <label class="col-lg-3 control-label">Price:</label>
@@ -87,25 +93,24 @@
             <select th:field="*{category.id}" class="form-control" name="category" id="category">
                 <option th:each="category : ${categories}"
                         th:value="${category.id}"
-                        th:selected="(${category.getId()} == ${product.getCategory().getId()})"
+                        th:selected="(${category.getId()} == ${category.getId()})"
                         th:text="${category.getName()}">
                 </option>
             </select>
         </div>
 
-    <div class="modal-footer">
-        <div>
-            <button type="submit" class="btn btn-success btn-md">
-                <i class="fa fa-paper-plane"></i>
-                Update
-            </button>
+        <div class="modal-footer">
+            <div>
+                <button type="submit" class="btn btn-success btn-md">
+                    <i class="fa fa-plus"></i>
+                    Add
+                </button>
+            </div>
         </div>
-    </div>
     </form>
 
-</div>
-<!-- End Content -->
 
+</div>
 <!-- Footer -->
 <div id="footer">
     <p>&copy; Sepetle.com. Design by <a href="http://sepetle.com">Sepetle.com</a></p>
