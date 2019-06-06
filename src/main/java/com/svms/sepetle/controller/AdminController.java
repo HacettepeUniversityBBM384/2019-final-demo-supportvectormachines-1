@@ -241,7 +241,7 @@ public class AdminController {
     }    
     
     @RequestMapping("/admin/addCategory")
-    public String addProduct(Model model) {
+    public String addCategory(Model model) {
         model.addAttribute("rCategory", new Category());
         return "addcategory";
     }
