@@ -7,4 +7,5 @@ import java.util.Collection;
 public interface CategoryService {
     Category findByName(String name);
     Collection<Category> findAll();
+    Category save(Category category);
 }
