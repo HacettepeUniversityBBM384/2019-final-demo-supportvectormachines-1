@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
@@ -14,6 +15,7 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 </head>
+
 <body>
       
 <div th:replace="fragments/seller_header :: header-seller"></div>
@@ -27,14 +29,6 @@
         <a href="#">Dashboard</a> &gt; Current Products
     </div>
     <!-- End Help Navigation -->
-
-    <!--    <div class="message thank-message">-->
-    <!--        <p><strong>Congratulations your information has been submited!</strong></p>-->
-    <!--    </div>-->
-
-    <!--    <div class="message error-message">-->
-    <!--        <p><strong>Error! The following fields were not entred correctly...</strong></p>-->
-    <!--    </div>-->
 
     <div th:if="${saveProduct eq 'success'}" class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert"
@@ -67,13 +61,6 @@
         </div>
     </div>
 
-
-    <!--            <form th:object="${product}"-->
-    <!--                  th:action="@{/shoppingCart/addProduct/{productId}(productId=${product.id})}" method="post">-->
-    <!--                <a sec:authorize="isAuthenticated()" th:if="${product.quantity}>0">-->
-    <!--                    <button type="submit">Add to cart</button>-->
-    <!--                </a>-->
-    <!--            </form>-->
 
 </div>
 <!-- End Content -->

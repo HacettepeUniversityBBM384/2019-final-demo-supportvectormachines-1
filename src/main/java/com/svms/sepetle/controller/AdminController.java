@@ -1,7 +1,9 @@
 package com.svms.sepetle.controller;
 
+import com.svms.sepetle.model.Category;
 import com.svms.sepetle.model.Product;
 import com.svms.sepetle.model.User;
+import com.svms.sepetle.service.CategoryService;
 import com.svms.sepetle.service.ProductService;
 import com.svms.sepetle.service.UserService;
 import com.svms.sepetle.utils.Encoder;
@@ -26,6 +28,9 @@ public class AdminController {
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    CategoryService categoryService;
 
     @Autowired
     UserService userService;   
@@ -66,8 +71,12 @@ public class AdminController {
 
         Optional<Product> o_product = productService.findById(id);
         Product product = o_product.get();
+        Collection<Category> categories = categoryService.findAll();
 
         model.addAttribute("product", product);
+        // model.addAttribute("category", new Category());
+        model.addAttribute("categories", categories);
+
         return "edit_product";
     }
 
@@ -81,7 +90,7 @@ public class AdminController {
         product.setDescription(oldProduct.getDescription());
         product.setRate(oldProduct.getRate());
         product.setReview_count(oldProduct.getReview_count());
-
+        product.setSeller(oldProduct.getSeller());
         productService.save(product);
 
         return new ModelAndView("redirect:/admin");
