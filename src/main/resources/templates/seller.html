@@ -43,7 +43,7 @@
             <ul>
                
                 <li><a th:href="@{/seller}" class="active"><span>Update Product</span></a></li>
-                <li><a href="#"><span>Add Product</span></a></li>
+                <li><a th:href="@{/seller/addProduct}"><span>Add Product</span></a></li>
                 <li><a href="#"><span>Add Sales</span></a></li>
                 
             </ul>
@@ -71,6 +71,18 @@
     <!--    <div class="message error-message">-->
     <!--        <p><strong>Error! The following fields were not entred correctly...</strong></p>-->
     <!--    </div>-->
+
+    <div th:if="${saveProduct eq 'success'}" class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert"
+                aria-hidden="true">&times;</button>
+        <strong>You have successfully added to the product.</strong>
+    </div>
+
+    <div th:if="${saveProduct eq 'fail'}" class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert"
+                aria-hidden="true">&times;</button>
+        <strong>Error!</strong>
+    </div>
 
     <div class="card" th:each="product : ${products}">
         <div class="card-body">
