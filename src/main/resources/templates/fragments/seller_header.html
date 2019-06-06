@@ -5,7 +5,7 @@
     <div class="shell">
 
         <div id="head">
-            <h1><a href="#">Sepetle Seller</a></h1>
+            <h1><a th:href="@{/seller}">Sepetle Seller</a></h1>
             <div class="right">
                 <p>
                     Welcome <a href="#"><strong>Seller</strong></a> |
@@ -27,7 +27,7 @@
         <div id="navigation">
             <ul>
                
-                <li><a th:href="@{/seller}" class="active"><span>Update Product</span></a></li>
+                <li><a th:href="@{/seller}"><span>Update Product</span></a></li>
                 <li><a th:href="@{/seller/addProduct}"><span>Add Product</span></a></li>
                 <li><a href="#"><span>Add Sales</span></a></li>
                 
@@ -38,3 +38,4 @@
     </div>
 </div>
 <!-- End Header -->
+
