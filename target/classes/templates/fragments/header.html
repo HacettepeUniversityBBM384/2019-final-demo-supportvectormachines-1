@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <div th:fragment="header-css">
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+        <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/webjars/font-awesome/5.0.10/web-fonts-with-css/css/fontawesome-all.min.css"/>
+        <link th:href="@{/css/update.css}" rel="stylesheet" media="screen"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/static/css/site.css}"/>
+        <!--<link rel="shortcut icon" href="/static/icons/favicon.ico">-->
+
+    </div>
+
+    <div th:fragment="header-login-css">
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!--         <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" /> -->
+        <!--         <link rel="stylesheet" href="/webjars/font-awesome/5.0.10/web-fonts-with-css/css/fontawesome-all.min.css"/> -->
+        <!--         <link rel="stylesheet" type="text/css" th:href="@{/static/css/site_login.css}"/> -->
+        <!--         <link rel="stylesheet" type="text/css" th:href="@{/static/css/site.css}"/> -->
+        <!--         <link rel="stylesheet" th:href="@{/static/icons/social/stylesheets/social_foundicons.css}"/> -->
+        <link rel="stylesheet" type="text/css" th:href="@{/static/css/site.css}"/>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+              id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+
+        <!------ Include the above in your HEAD tag ---------->
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    </div>
+    
+    
+    
+    
+</head>
+<body>
+<div th:fragment="header">
+
+    <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" th:href="@{/home}">
+            <i class='fa fa-shopping-cart'>
+                <span>Sepetle</span>
+            </i></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-envelope-o">
+                            <span class="badge badge-danger">11</span>
+                        </i>
+                        Notifications
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">
+                        <i class="fa fa-envelope-o">
+                            <span class="badge badge-warning">3</span>
+                        </i>
+                        My Orders
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-envelope-o">
+                            <span class="badge badge-primary">11</span>
+                        </i>
+                        Categories
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Electronics</a>
+                        <a class="dropdown-item" href="#">Shoes</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">New Products</a>
+                    </div>
+                </li>
+
+                <li sec:authorize="isAuthenticated()" class="nav-item active">
+                    <a class="btn icon-btn" th:href="@{/shoppingCart}">
+                        <button type="button" class="btn btn-info">
+                            <i class="fa fa-shopping-cart">
+                            </i>
+                            Shopping Cart
+                        </button>
+                    </a>
+                </li> 
+
+            </ul>
+
+            <ul class="navbar-nav ">
+
+                <li sec:authorize="isAuthenticated()" class="nav-item active">
+                    <a class="btn icon-btn" th:href="@{/user/edit}">
+                        <button type="button" class="btn btn-warning">
+                            <i class="fa fa-edit">
+                            </i>
+                            Update Information
+                        </button>
+                    </a>
+                </li>
+                
+                <li sec:authorize="isAuthenticated()" class="nav-item active">
+                    <a class="btn icon-btn" th:href="@{/help}">
+                        <button type="button" class="btn btn-info">
+                            <i class="fa fa-help">
+                            </i>
+                            Help
+                        </button>
+                    </a>
+                </li>
+
+            </ul>
+
+            <form sec:authorize="!isAuthenticated()" th:action="@{/login}" method="get">
+                <input style="margin-right:10px" class="btn btn-success" type="submit" value="Login"/>
+            </form>
+
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                <input style="margin-right:10px" class="btn btn-danger" type="submit" value="Sign Out"/>
+            </form>
+
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+
+</div>
+</body>
+</html>

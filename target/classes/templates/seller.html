@@ -15,8 +15,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 </head>
 <body>
+      
+<div th:replace="fragments/seller_header :: header-seller"></div>
 
-<div th:replace="fragments/admin_header :: header"></div>
 
 <!-- Content -->
 <div id="content" class="shell">
@@ -35,6 +36,18 @@
     <!--        <p><strong>Error! The following fields were not entred correctly...</strong></p>-->
     <!--    </div>-->
 
+    <div th:if="${saveProduct eq 'success'}" class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert"
+                aria-hidden="true">&times;</button>
+        <strong>You have successfully added to the product.</strong>
+    </div>
+
+    <div th:if="${saveProduct eq 'fail'}" class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert"
+                aria-hidden="true">&times;</button>
+        <strong>Error!</strong>
+    </div>
+
     <div class="card" th:each="product : ${products}">
         <div class="card-body">
             <div class="row">
@@ -45,10 +58,9 @@
                     <h4 class="card-title"><a th:text="${product.name}" th:href="@{'/product/' + ${product.id}}"><p
                             th:text="${product.name}"></p></a></h4>
                     <h6 class="card-subtitle mb-2 text-muted">Price: $[[${product.price}]] | Quantity: [[${product.quantity}]]</h6>
-                    <p class="card-text">[[${product.description}]] Donec id elit non mi porta gravida at eget metus. Maecenas
-                        sed diam eget risus varius blandit.</p>
-                    <a th:href="@{/admin/editProduct/{id}(id=${product.id})}" class="card-link">Update</a>
-                    <a th:href="@{/admin/removeProduct/{id}(id=${product.id})}" class="card-link">Remove</a>
+                    <p class="card-text">[[${product.description}]] Didem çok zekidir.</p>
+                    <a th:href="@{/seller/editProduct/{id}(id=${product.id})}" class="card-link">Update</a>
+                    <a th:href="@{/seller/removeProduct/{id}(id=${product.id})}" class="card-link">Remove</a>
 
                 </div>
             </div>

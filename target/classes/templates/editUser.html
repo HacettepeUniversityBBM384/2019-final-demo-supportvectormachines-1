@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit</title>
+    <div th:replace="fragments/header :: header-login-css"></div>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/products.css}"/>
+    <script type="text/javascript" th:src="@{/static/js/products.js}"></script>
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <h1>Edit Profile</h1>
+  	<hr>
+	<div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img width="90%" src="https://www.29mayis.edu.tr/public/images/default-profile.png" class="avatar img-circle" alt="avatar">
+          <h6>Upload a different photo...</h6>
+
+          <input type="file" class="form-control">
+        </div>
+      </div>
+
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+          <div th:if="${msg eq 'success'}" class="alert alert-success alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert"
+                      aria-hidden="true">&times;
+              </button>
+              <strong>Success! </strong> Your information has been updated.
+          </div>
+          
+          <div th:if="${err eq 'invalid-pass'}" class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert"
+                            aria-hidden="true">&times;</button>
+                    <strong>Error!</strong> The password must be at least 8 characters in length!
+                </div>
+
+        <form th:object="${user}" th:action="@{/user/update/{id}(id=${user.id})}" method="post">
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Username:</label>
+              <input th:field="*{username}" type="text" class="form-control"
+                     required="required" placeholder="Username"/>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Password:</label>
+              <input th:field="*{password}" type="password" class="form-control"
+                     placeholder="Password"/>
+          </div>
+
+          <div class="form-group">
+              <label class="col-lg-3 control-label">E-mail:</label>
+
+              <input th:field="*{email}" type="text" class="form-control"
+                     required="required"
+                     placeholder="Email"/>
+          </div>
+
+          <div class="modal-footer">
+                <div>
+                    <button type="submit" class="btn btn-success btn-md">
+                        <i class="fa fa-paper-plane"></i>
+                        Update
+                    </button>
+                </div>
+            </div>
+        </form>
+      </div>
+  </div>
+</div>
+
+<hr>
+
+<footer>
+    <div class="separator" th:replace="fragments/footer :: footer"></div>
+</footer>
+
+</body>
+</html>
