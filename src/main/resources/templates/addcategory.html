@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}"/>
+
+
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+</head>
+<body>
+
+<div th:replace="fragments/admin_header :: header"></div>
+
+
+<!-- Content -->
+<div id="content" class="shell">
+
+    <!-- Help Navigation -->
+    <div id="help-nav">
+        <a th:href="@{/admin}">Dashboard</a> &gt; Add Seller
+    </div>
+
+    <form th:object="${rCategory}" th:action="@{/admin/saveCategory}" method="post">
+        <div class="form-group">
+            <label>Category</label>
+            <input th:field="*{name}" type="text" name="category_name" class="form-control"
+                   placeholder="Category Name" required="required" value=""/>
+        </div>
+    </form>
+
+
+
+
+
+</div>
+<!-- End Content -->
+
+<!-- Footer -->
+<div id="footer">
+    <p>&copy; Sepetle.com. Design by <a href="http://sepetle.com">Sepetle.com</a></p>
+</div>
+<!-- End Footer -->
+</body>
+</html>
+
+
+
+</body>
+</html>
