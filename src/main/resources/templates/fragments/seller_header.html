@@ -1,1 +1,40 @@
+<!-- Header -->
 
+<div id="header-seller" th:fragment="header-seller">
+	
+    <div class="shell">
+
+        <div id="head">
+            <h1><a href="#">Sepetle Seller</a></h1>
+            <div class="right">
+                <p>
+                    Welcome <a href="#"><strong>Seller</strong></a> |
+                    <a href="#">Help</a> |
+                    <a href="#">Profile Settings</a> |
+                <form th:action="@{/logout}" method="post">
+                    <input class="btn btn-xs btn-danger" type="submit" value="Sign Out" style="
+    padding-bottom: 3px;
+    padding-top: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+"/>
+                </form>
+                </p>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div id="navigation">
+            <ul>
+               
+                <li><a th:href="@{/seller}" class="active"><span>Update Product</span></a></li>
+                <li><a th:href="@{/seller/addProduct}"><span>Add Product</span></a></li>
+                <li><a href="#"><span>Add Sales</span></a></li>
+                
+            </ul>
+        </div>
+        <!-- End Navigation -->
+
+    </div>
+</div>
+<!-- End Header -->
