@@ -72,6 +72,13 @@
         </div>
 
         <div class="form-group">
+            <label class="col-lg-3 control-label">Description:</label>
+
+            <textarea th:field="*{description}" placeholder="Please enter a description." class="form-control" rows="4" cols="50">
+            </textarea>
+        </div>
+
+        <div class="form-group">
             <label class="col-lg-3 control-label">Price:</label>
             <input th:field="*{price}" type="text" class="form-control"
                    placeholder="Price"/>
@@ -83,6 +90,17 @@
                    placeholder="Quantity"/>
         </div>
 
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Category:</label>
+            <select th:field="*{category.id}" class="form-control" name="category" id="category">
+                <option th:each="category : ${categories}"
+                        th:value="${category.id}"
+                        th:selected="(${category.getId()} == ${product.getCategory().getId()})"
+                        th:text="${category.getName()}">
+                </option>
+            </select>
+        </div>
+
         <div class="modal-footer">
             <div>
                 <button type="submit" class="btn btn-success btn-md">
@@ -92,6 +110,7 @@
             </div>
         </div>
     </form>
+
 
 </div>
 <!-- End Content -->
