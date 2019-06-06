@@ -239,4 +239,23 @@ public class AdminController {
         userService.delete(id);
         return new ModelAndView("redirect:/admin/customer");
     }    
+    
+    @RequestMapping("/admin/addCategory")
+    public String addProduct(Model model) {
+        model.addAttribute("rCategory", new Category());
+        return "addcategory";
+    }
+
+    @RequestMapping(value = {"/admin/saveCategory"}, method = RequestMethod.POST)
+    public String saveCategory(@ModelAttribute("rCategory") Category rCategory,
+                              final RedirectAttributes redirectAttributes) {
+
+        if (categoryService.save(rCategory) != null) {
+            redirectAttributes.addFlashAttribute("saveCategory", "success");
+        } else {
+            redirectAttributes.addFlashAttribute("saveCategory", "fail");
+        }
+
+        return "redirect:/admin/";
+    }
 }
