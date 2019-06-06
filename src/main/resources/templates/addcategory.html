@@ -18,13 +18,12 @@
 
 <div th:replace="fragments/admin_header :: header"></div>
 
-
 <!-- Content -->
 <div id="content" class="shell">
 
     <!-- Help Navigation -->
     <div id="help-nav">
-        <a th:href="@{/admin}">Dashboard</a> &gt; Add Seller
+        <a th:href="@{/admin}">Dashboard</a> &gt; Add Category
     </div>
 
     <form th:object="${rCategory}" th:action="@{/admin/saveCategory}" method="post">
@@ -33,11 +32,16 @@
             <input th:field="*{name}" type="text" name="category_name" class="form-control"
                    placeholder="Category Name" required="required" value=""/>
         </div>
+
+        <div class="modal-footer">
+            <div>
+                <button type="submit" class="btn btn-success btn-md">
+                    <i class="fa fa-plus"></i>
+                    Add
+                </button>
+            </div>
+        </div>
     </form>
-
-
-
-
 
 </div>
 <!-- End Content -->
