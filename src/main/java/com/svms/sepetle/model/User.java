@@ -1,6 +1,7 @@
 package com.svms.sepetle.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 
@@ -25,6 +26,31 @@ public class User {
 
     @Column(name = "email")
     private String email;
+
+    @OneToMany(mappedBy = "user")
+    private Collection<Order> orders;
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    @Column(name = "firstname")
+    private String firstname;
+
+    @Column(name = "lastname")
+    private String lastname;
 
     @Column(name = "role")
     private int role;
@@ -113,6 +139,6 @@ public class User {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", role="
 				+ role + "]";
 	}
-    
+
     
 }

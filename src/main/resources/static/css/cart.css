@@ -48,7 +48,7 @@ a:hover {
 }
 .product_cart {
     color: #767676;
-    margin: 20px;
+    margin: 0 20px 20px 20px;
     box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
@@ -98,11 +98,10 @@ a:hover {
     display: none;
     font-weight: bold;
     margin-left: 3px;
-    color: #cc2d0d !important;
+    color: #feffff !important;
     border-width: 1px;
     box-shadow: none !important;
-    font-size: 14px;
-    padding-bottom: 3px !important;
+    font-size: 12px;
 }
 .product_cart .remove .uxicon {
     margin-top: 3px;
@@ -120,12 +119,11 @@ a:hover {
     float: right;
     clear: right;
     display: none;
-    color: #1b9c21 !important;
+    color: #fefffd !important;
     border-width: 1px;
     box-shadow: none !important;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
-    padding-bottom: 3px !important;
 }
 .product_cart .add .uxicon {
     margin-top: 3px;

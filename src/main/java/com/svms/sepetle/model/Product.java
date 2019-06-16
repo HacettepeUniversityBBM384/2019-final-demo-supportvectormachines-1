@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import java.math.BigDecimal;
+import java.util.Collection;
 
 @Entity
 @DynamicUpdate
@@ -49,6 +50,9 @@ public class Product {
     @Column(name = "price", nullable = false)
     @DecimalMin(value = "0.00", message = "*Price has to be non negative number")
     private BigDecimal price;
+
+    @ManyToMany(mappedBy = "products")
+    private Collection<Order> orders;
 
     public Category getCategory() {
         return category;

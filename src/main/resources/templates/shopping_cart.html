@@ -16,14 +16,14 @@
 
 <div class="container">
 
-    <div class="py-5 text-left">
-        <h2>Shopping Cart </h2>
+    <div style="margin-left: -25px; margin-top: 10px" class="py-5 text-left">
+        <h1>Shopping Cart </h1>
     </div>
 
-    <div class="row cart">
+    <div class="row cart" style="margin-bottom: 40px">
 
         <div class="basket col-md-7">
-            <div class="product_cart ux-card" th:each="product : ${products.entrySet()}">
+            <div class="product_cart shadow-lg ux-card" th:each="product : ${products.entrySet()}">
                 <div class="row">
 
                     <div class="col-md-2">
@@ -39,13 +39,13 @@
                             <form th:object="${product}"
                                   th:action="@{/shoppingCart/addProduct/{productId}(productId=${product.getKey().id})}" method="post">
                                 <a sec:authorize="isAuthenticated()" th:if="${product.getKey().quantity}>0">
-                                    <button type="submit" class="btn btn-canvas btn-xs add" th:text="ADD"></button>
+                                    <button type="submit" class="btn btn-primary btn-xs add" th:text="ADD"></button>
                                 </a>
                             </form>
 
                             <form th:object="${product}" th:action="@{/shoppingCart/removeProduct/{productId}(productId=${product.getKey().id})}" method="post">
                                 <a sec:authorize="isAuthenticated()">
-                                    <button type="submit" class="btn btn-canvas btn-xs remove" th:text="REMOVE"></button>
+                                    <button type="submit" class="btn btn-danger btn-xs remove" th:text="REMOVE"></button>
                                 </a>
                             </form>
                         </div>
@@ -87,7 +87,7 @@
             </div>
 
             <div class="complete">
-                <a th:href="@{'/shoppingCart/formCheckout'}">
+                <a th:href="@{/order_form}">
                     <button type="submit" class="btn btn-success btn-purchase">Checkout</button>
                 </a>
             </div>

@@ -51,11 +51,4 @@ public class CartController {
         return shoppingCart();
     }
 
-    @GetMapping("/shoppingCart/formCheckout")
-    public String checkoutForm() {
-        System.out.println("CHECKOUT FORM");
-        return "checkout";
-    }
-
-
 }
