@@ -4,8 +4,6 @@
 
 <head>
     <div th:replace="fragments/header :: header-login-css"></div>
-    <link rel="stylesheet" type="text/css" th:href="@{/static/css/products.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/static/css/cart.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/view.css}"/>
 
 
@@ -22,7 +20,7 @@
             <div class="breadcrumbs d-flex flex-column align-items-center justify-content-center">
                 <ul class="d-flex flex-row align-items-start justify-content-start text-center">
                     <li><a th:href="@{/home}">Home</a></li>
-                    <li>New Products</li>
+                    <li>[[${product.getCategory().getName()}]]</li>
                 </ul>
             </div>
         </div>
@@ -60,7 +58,7 @@
                         <div class="product_reviews"><span th:text="${#numbers.formatInteger(product.rate, 0, 'COMMA')}"></span> out of ([[${product.review_count}]])</div>
                         <div class="product_reviews_link"><a href="#">Reviews</a></div>
                     </div>
-                    <div class="product_price">$[[${product.price}]]<span>.99</span></div>
+                    <div class="product_price">$[[${product.price}]]<span>.00</span></div>
                     <div class="product_size">
                         <div class="product_size_title">Select Size</div>
                         <ul class="d-flex flex-row align-items-start justify-content-start">

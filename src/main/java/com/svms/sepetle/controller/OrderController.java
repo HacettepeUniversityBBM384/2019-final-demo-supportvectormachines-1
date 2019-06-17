@@ -1,24 +1,17 @@
 package com.svms.sepetle.controller;
 
+import com.svms.sepetle.model.Category;
 import com.svms.sepetle.model.Order;
 import com.svms.sepetle.model.Product;
-import com.svms.sepetle.model.User;
-import com.svms.sepetle.service.CartService;
-import com.svms.sepetle.service.OrderService;
-import com.svms.sepetle.service.UserService;
+import com.svms.sepetle.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @SessionAttributes("Order")
@@ -28,13 +21,18 @@ public class OrderController {
     private final UserService userService;
     private final CartService cartService;
     private final AppController globalController;
+    private final ProductService productService;
+    private final CategoryService categoryService;
+
 
     @Autowired
-    public OrderController(OrderService orderService, UserService userService, CartService cartService, AppController globalController) {
+    public OrderController(OrderService orderService, UserService userService, CartService cartService, AppController globalController, ProductService productService, CategoryService categoryService) {
         this.orderService = orderService;
         this.userService = userService;
         this.cartService = cartService;
         this.globalController = globalController;
+        this.productService = productService;
+        this.categoryService = categoryService;
     }
 
     @RequestMapping(value = "/order_form", method = RequestMethod.GET)
@@ -80,13 +78,22 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/payment", method = RequestMethod.POST)
-    public String completePayment(@ModelAttribute("Order") final Order order, final Model model) {
+    public ModelAndView completePayment(@ModelAttribute("Order") final Order order, final Model model) {
         System.out.println("PAYMENT POST");
         cartService.checkout();
         System.out.println(order);
         orderService.saveOrder(order);
 
-        return "shoppingCart";
+        Collection<Product> products = productService.findAll();
+        Collection<Category> categories = categoryService.findAll();
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("home");
+
+        modelAndView.addObject("products", products);
+        modelAndView.addObject("categories", categories);
+
+        return modelAndView;
     }
 
 

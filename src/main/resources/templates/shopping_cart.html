@@ -22,6 +22,10 @@
 
     <div class="row cart" style="margin-bottom: 40px">
 
+        <div th:if="${products.entrySet() == null}">
+            No data
+        </div>
+
         <div class="basket col-md-7">
             <div class="product_cart shadow-lg ux-card" th:each="product : ${products.entrySet()}">
                 <div class="row">
