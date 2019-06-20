@@ -3,6 +3,7 @@ package com.svms.sepetle.controller;
 import com.svms.sepetle.model.Category;
 import com.svms.sepetle.model.Order;
 import com.svms.sepetle.model.Product;
+import com.svms.sepetle.model.User;
 import com.svms.sepetle.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -80,20 +81,20 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/payment", method = RequestMethod.POST)
-    public ModelAndView completePayment(@ModelAttribute("Order") final Order order, final Model model) {
+    public ModelAndView completePayment(@ModelAttribute("Order") final Order order) {
         System.out.println("PAYMENT POST");
         cartService.checkout();
         System.out.println(order);
         orderService.saveOrder(order);
 
-        Collection<Product> products = productService.findAll();
-        Collection<Category> categories = categoryService.findAll();
-
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("home");
+        modelAndView.setViewName("my_orders");
 
-        modelAndView.addObject("products", products);
-        modelAndView.addObject("categories", categories);
+        int id = globalController.getLoginUser().getId();
+        User user = userService.findById(id);
+
+        Collection<Order> orders = user.getOrders();
+        modelAndView.addObject("orders", orders);
 
         return modelAndView;
     }

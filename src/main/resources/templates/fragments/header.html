@@ -58,6 +58,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
 
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <a class="nav-link active" th:href="@{/my_orders}">
+                        <i class="fa fa-envelope-o">
+                            <span class="badge badge-warning"><i class="fa fa-history"></i></span>
+                        </i>
+                        My Orders
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="#">
                         <i class="fa fa-envelope-o">
@@ -66,14 +75,7 @@
                         Notifications
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">
-                        <i class="fa fa-envelope-o">
-                            <span class="badge badge-warning">3</span>
-                        </i>
-                        My Orders
-                    </a>
-                </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -90,7 +92,12 @@
                     </div>
                 </li>
 
-                <li sec:authorize="isAuthenticated()" class="nav-item active">
+
+            </ul>
+
+            <ul class="navbar-nav ">
+
+                <li style="margin-right: -15px;" sec:authorize="isAuthenticated()" class="nav-item active">
                     <a class="btn icon-btn" th:href="@{/shoppingCart}">
                         <button type="button" class="btn btn-info">
                             <i class="fa fa-shopping-cart">
@@ -98,11 +105,7 @@
                             Shopping Cart
                         </button>
                     </a>
-                </li> 
-
-            </ul>
-
-            <ul class="navbar-nav ">
+                </li>
 
                 <li sec:authorize="isAuthenticated()" class="nav-item active">
                     <a class="btn icon-btn" th:href="@{/user/edit}">
@@ -114,15 +117,7 @@
                     </a>
                 </li>
                 
-                <li sec:authorize="isAuthenticated()" class="nav-item active">
-                    <a class="btn icon-btn" th:href="@{/help}">
-                        <button type="button" class="btn btn-info">
-                            <i class="fa fa-help">
-                            </i>
-                            Help
-                        </button>
-                    </a>
-                </li>
+
 
             </ul>
 

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <div th:replace="fragments/header :: header-login-css"></div>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/products.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/cart.css}"/>
+    <script type="text/javascript" th:src="@{/static/js/products.js}"></script>
+
+    <title>Shopping Cart</title>
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+
+    <div style="margin-left: -25px; margin-top: 10px" class="py-5 text-left">
+        <h1>My Orders </h1>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Order ID</th>
+            <th scope="col">Purchase Date</th>
+            <th scope="col">Address</th>
+            <th scope="col">Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-default" th:each="order : ${orders}">
+            <th scope="row">[[${order.getOrder_id()}]]</th>
+            <td>[[${order.getPurchase_date()}]]</td>
+            <td>[[${order.getAddress()}]]</td>
+            <td>$[[${order.getPrice()}]]</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

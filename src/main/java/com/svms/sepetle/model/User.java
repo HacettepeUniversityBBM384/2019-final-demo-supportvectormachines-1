@@ -140,5 +140,12 @@ public class User {
 				+ role + "]";
 	}
 
-    
+
+    public Collection<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Collection<Order> orders) {
+        this.orders = orders;
+    }
 }

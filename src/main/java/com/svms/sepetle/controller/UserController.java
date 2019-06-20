@@ -1,5 +1,6 @@
 package com.svms.sepetle.controller;
 
+import com.svms.sepetle.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,8 @@ import com.svms.sepetle.model.User;
 import com.svms.sepetle.service.UserService;
 import com.svms.sepetle.utils.Encoder;
 import com.svms.sepetle.utils.Roles;
+
+import java.util.Collection;
 
 @Controller
 public class UserController {
@@ -41,7 +44,7 @@ public class UserController {
     @RequestMapping(value = {"/user/register"}, method = RequestMethod.POST)
     public String register(@ModelAttribute("rUser") User rUser,
                            final RedirectAttributes redirectAttributes) {
-    	
+
     	System.out.println(rUser.toString());
         User user = userService.findByUserName(rUser.getUsername());
         if (user != null) {
@@ -56,9 +59,9 @@ public class UserController {
 
         if(rUser.getPassword().length() < 8) {
         	 redirectAttributes.addFlashAttribute("saveUser", "invalid-pass");
-             return "redirect:/register";	
+             return "redirect:/register";
         }
-        
+
         rUser.setPassword(Encoder.getInstance().passwordEncoder.encode(rUser.getPassword()));
         rUser.setRole(Roles.ROLE_USER.getValue());
 
@@ -70,13 +73,13 @@ public class UserController {
 
         return "redirect:/register";
     }
-	
+
     @RequestMapping(value="/help", method = RequestMethod.GET)
     public String showHelpPage(Model model) {
-    	
+
 	      return "help";
     }
-    
+
     @RequestMapping(value="/user/edit", method = RequestMethod.GET)
     public String showUpdateForm(Model model) {
     	  int id = globalController.getLoginUser().getId();
@@ -85,13 +88,13 @@ public class UserController {
 	      model.addAttribute("userId", id);
 	      return "editUser";
     }
-    
+
     @PostMapping("/user/update/{id}")
 	public String updateUser(@PathVariable("id") int id, @ModelAttribute("user") User user, Model model,
                              final RedirectAttributes redirectAttributes) {
 
     	  System.out.println(user.toString());
-    	  
+
     	  User oldUser = userService.findById(id);
     	  String oldPassword = oldUser.getPassword();
 	      user.setRole(oldUser.getRole());
@@ -104,18 +107,26 @@ public class UserController {
 	         	 redirectAttributes.addFlashAttribute("err", "invalid-pass");
 	         	 user.setPassword(oldPassword);
 	         	 userService.save(user);
-	             return "redirect:/user/edit";	
+	             return "redirect:/user/edit";
 	         }
 	    	  user.setPassword(Encoder.getInstance().passwordEncoder.encode(user.getPassword()));
 	      }
-	      
+
 	      userService.save(user);
-	      
+
 	      System.out.println(user.toString());
 		  model.addAttribute("msg", "success");
 		  return "editUser";
 	  }
-    
 
+    @RequestMapping(value="/my_orders", method = RequestMethod.GET)
+    public String myOrders(Model model) {
+        int id = globalController.getLoginUser().getId();
+        User user = userService.findById(id);
 
+        Collection<Order> orders = user.getOrders();
+        model.addAttribute("user", user);
+        model.addAttribute("orders", orders);
+        return "my_orders";
+    }
 }
