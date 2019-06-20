@@ -40,8 +40,10 @@ public class OrderController {
         System.out.println("ORDER GET");
         ModelAndView modelAndView = new ModelAndView();
         Order order = new Order();
+        Map<Product,Integer> products = cartService.getProductsInCart();
+
         modelAndView.addObject("order", order);
-        modelAndView.addObject("products", cartService.getProductsInCart());
+        modelAndView.addObject("products", products);
         modelAndView.addObject("total", cartService.getTotal().toString());
         modelAndView.setViewName("/checkout");
         return modelAndView;

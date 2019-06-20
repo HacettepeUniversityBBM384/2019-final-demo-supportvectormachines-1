@@ -7,8 +7,24 @@
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/products.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/cart.css}"/>
     <script type="text/javascript" th:src="@{/static/js/products.js}"></script>
+    <style>
+        .ajax-loader {
+            visibility: hidden;
+            background-color: rgba(255, 255, 255, 0.7);
+            position: absolute;
+            z-index: +100 !important;
+            width: 80%;
+        }
 
-    <title>Shopping Cart</title>
+        .ajax-loader img {
+            margin-top: 125px;
+            display: block;
+            border-radius: 10px;
+            width: 70%;
+
+        }
+    </style>
+    <title>Checkout</title>
 </head>
 
 <body>
@@ -19,10 +35,17 @@
         <h1>Shipping Information</h1>
     </div>
 
-    <div class="row">
+    <div class="row ajax-loader">
+        <div class="col"></div>
+        <div class="col">
+            <img src="http://aristocrattechnology.com/img/b11.gif" class="img-responsive shadow-lg"/>
+        </div>
+        <div class="col"></div>
+    </div>
 
+    <div class="row">
         <div class="col-md-7 order-md-1">
-            <form class="needs-validation" th:action="@{/post_order}" th:object="${order}" method="post" role="form">
+            <form id="checkoutForm" name="checkoutForm" class="needs-validation" th:action="@{/post_order}" th:object="${order}" method="post" role="form">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="firstName">First name</label>
@@ -102,11 +125,10 @@
 
                 <hr class="mb-4">
                 <div class="complete">
-                        <button class="btn btn-primary btn-purchase" type="submit">Proceed to payment</button>
+                        <button onclick="formSubmitClick()" class="btn btn-primary btn-purchase">Proceed to payment</button>
                 </div>
             </form>
         </div>
-
         <div class="col-md-5 order-md-1">
 
             <div class="summary">
@@ -136,16 +158,32 @@
                 </dl>
 
             </div>
-
-
-
-
         </div>
-
     </div>
 </div>
 
 <script>
+
+    function formSubmitClick()
+    {
+        show_loader();
+        setTimeout('hide_loader()', 2500);
+
+    }
+
+    function show_loader() {
+        $('.ajax-loader').css("visibility", "visible");
+    }
+
+    function hide_loader() {
+        $('.ajax-loader').css("visibility", "hidden");
+    }
+
+    function sleep(seconds){
+        var waitUntil = new Date().getTime() + seconds*1000;
+        while(new Date().getTime() < waitUntil) true;
+    }
+
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function() {
         'use strict';
@@ -153,6 +191,7 @@
         window.addEventListener('load', function() {
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.getElementsByClassName('needs-validation');
+
 
             // Loop over them and prevent submission
             var validation = Array.prototype.filter.call(forms, function(form) {

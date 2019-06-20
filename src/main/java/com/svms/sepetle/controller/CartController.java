@@ -26,6 +26,7 @@ public class CartController {
         ModelAndView modelAndView = new ModelAndView("/shopping_cart");
         modelAndView.addObject("products", cartService.getProductsInCart());
         modelAndView.addObject("total", cartService.getTotal().toString());
+        modelAndView.addObject("size", cartService.getProductsInCart().size());
 
         return modelAndView;
     }

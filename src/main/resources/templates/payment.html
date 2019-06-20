@@ -134,7 +134,7 @@
                 <input type='text' id='cardcvc' name='cardcvc' placeholder="123" pattern="\d*" title='CVC Code' />
             </p>
             <form method="post" id="paymentForm" name="paymentForm" th:action="@{/payment}">
-                <button type="button" onclick="btnSearchClick();" class='button-cta' title='Confirm your purchase'><span>PURCHASE</span></button>
+                <button type="button" onclick="btnSubmitClick();" class='button-cta' title='Confirm your purchase'><span>PURCHASE</span></button>
             </form>
         </div>
     </div>
@@ -155,7 +155,7 @@
     function submitForm() { // submits form
         document.getElementById("paymentForm").submit();
     }
-    function btnSearchClick()
+    function btnSubmitClick()
     {
         if (document.getElementById("paymentForm")) {
             setTimeout("submitForm()", 3000); // set timout

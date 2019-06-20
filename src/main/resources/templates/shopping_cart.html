@@ -22,10 +22,6 @@
 
     <div class="row cart" style="margin-bottom: 40px">
 
-        <div th:if="${products.entrySet() == null}">
-            No data
-        </div>
-
         <div class="basket col-md-7">
             <div class="product_cart shadow-lg ux-card" th:each="product : ${products.entrySet()}">
                 <div class="row">
@@ -49,7 +45,7 @@
 
                             <form th:object="${product}" th:action="@{/shoppingCart/removeProduct/{productId}(productId=${product.getKey().id})}" method="post">
                                 <a sec:authorize="isAuthenticated()">
-                                    <button type="submit" class="btn btn-danger btn-xs remove" th:text="REMOVE"></button>
+                                    <button  type="submit" class="btn btn-danger btn-xs remove" th:text="REMOVE"></button>
                                 </a>
                             </form>
                         </div>
@@ -90,7 +86,7 @@
                 <p class="agreed">I've read and agreed to the <a href="terms/show">Term & Conditions</a>.</p>
             </div>
 
-            <div class="complete">
+            <div th:if="${size > 0}" class="complete">
                 <a th:href="@{/order_form}">
                     <button type="submit" class="btn btn-success btn-purchase">Checkout</button>
                 </a>
