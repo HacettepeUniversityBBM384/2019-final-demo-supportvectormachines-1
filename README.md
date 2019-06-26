@@ -2,7 +2,7 @@
 
 Welcome to the project repository of BBM384 Final Demo.
 
-![](https://cdn.dribbble.com/users/107759/screenshots/4330227/dribbble-loop-60.gif)
+![](https://lh4.googleusercontent.com/VHd4YSLVXevkKE7Gvo5ncrXjRB6DtGGztwTJhiQWH-5GmWJXzIZ0MttkqKXdaF_ZtEi8FW-4D5u19JQQc40Y7DqAamQERXJ3PUkRxeewrrai9TPfZBMPkKybw9YX5XaJfppf7W1StYU)
 
 ```
 Group SupportVectorMachines.
