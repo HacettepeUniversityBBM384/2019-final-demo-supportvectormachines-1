@@ -10,7 +10,7 @@ Group SupportVectorMachines.
 
 Keep checking for any news.
 
-## Project Descirption :crescent_moon:
+## Project Description :crescent_moon:
 The direction of electronic commerce from seller to buyer (e-commerce) is the best commercial online shopping system. The main purpose of an online shopping system website is the sale of goods. This project aims to develop an online shopping website. The user is provided with a shopping cart to facilitate online shopping.Sepetle is an e-commerce web app written in Java.
 
 ## Built With
